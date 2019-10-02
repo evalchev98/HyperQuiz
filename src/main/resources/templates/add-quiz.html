@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<th:block th:include="~{head}"></th:block>
+</head>
+<body>
+<header>
+	<th:block th:include="~{navbar}"></th:block>
+</header>
+<main class="mt-3">
+    <h1 class="text-center text-dark">Add Quiz</h1>
+    <hr class="hr-2 bg-dark w-25">
+    <form id="add-category-form" class="form w-25 mx-auto" th:action="@{/quizzes/add}" method="post" th:object="${model}">
+        <div class="form-group">
+            <label for="add-quiz-title" class="font-weight-bold">Title</label>
+            <input type="text" class="form-control text-center" id="add-category-name" name="name" th:value="*{name}">
+        </div>
+        <div class="form-group">
+            <label for="add-quiz-expectedDuration" class="font-weight-bold">Expected duration</label>
+            <input type="number" class="form-control text-center" id="add-quiz-expectedDuration" name="expectedDuration" th:value="*{expectedDuration}">
+        </div>
+        <hr class="hr-2 bg-dark">
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn btn-success">Add Quiz</button>
+        </div>
+    </form>
+</main>
+<footer>
+<th:block th:include="~{footer}"></th:block>
+</footer>
+</body>
+</html>
