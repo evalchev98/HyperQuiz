@@ -1,8 +1,8 @@
 package HyperQuiz.web;
 
-import java.security.Principal;
 
-import javax.servlet.http.HttpSession;
+import java.security.Principal;
+import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 
 import HyperQuiz.entities.Quiz;
 import HyperQuiz.entities.QuizResult;
@@ -51,6 +53,24 @@ public class QuizResultController extends BaseController {
 		quizResult.setQuiz(quiz);
 		this.quizResultService.createQuizResult(quizResult);
 		return super.redirect("/home");
+	}
+	
+	@GetMapping("/quizzes")
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public ModelAndView showQuizzes(ModelAndView modelAndView) {
+		List<Quiz> quizzes = this.quizService.findAllQuizzes();
+		modelAndView.addObject("quizzes", quizzes);
+		return super.view("quizzes-leaderboard", modelAndView);
+	}
+	
+	@GetMapping("/leaderboard/{id}")
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public ModelAndView showLeaderboard(ModelAndView modelAndView,@PathVariable String id) {
+		Quiz quiz=this.quizService.findQuizByID(id);
+		List<QuizResult> quizResults = this.quizResultService.findByQuiz(quiz);
+		this.quizResultService.sortResults(quizResults);
+		modelAndView.addObject("quizResults", quizResults);
+		return super.view("quiz-leaderboard", modelAndView);
 	}
 
 }

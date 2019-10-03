@@ -9,28 +9,26 @@
 	<th:block th:include="~{navbar}"></th:block>
 </header>
 	<main class="mt-3">
-    <h1 class="text-center text-dark">All Quizzes</h1>
+    <h1 class="text-center text-dark">Leaderboard</h1>
     <hr class="hr-2 bg-dark w-75">
     <table class="table table-hover w-75 mx-auto">
         <thead>
         <tr class="row mx-auto">
             <th class="col-md-2 text-center">#</th>
-            <th class="col-md-3 text-center">Image</th>
             <th class="col-md-5 text-center">Name</th>
-            <th class="col-md-5 text-center">Expected duration</th>
+			 <th class="col-md-5 text-center">Score</th>   
         </tr>
         </thead>
         <tbody>
 
-        <th:block th:each="quiz, iter : ${quizzes}">
+        <th:block th:each="quizResult, iter : ${quizResults}">
             <tr class="row mx-auto">
                 <th class="col-md-2 text-center" th:text="${iter.index + 1}"></th>
-                <td class="col-md-3"><div class="text-center"><img th:src="${quiz.imageUrl}" width="40" height="40" alt="Quiz"></div></td> 
-                <td class="col-md-5 text-center" th:text="${quiz.name}"></td>
-                <td class="col-md-5 text-center" th:text="${quiz.expectedDuration}"></td>
+                <td class="col-md-5 text-center" th:text="${quizResult.user.username}"></td>
+                <td class="col-md-5 text-center" th:text="${quizResult.score}"></td>
                 <td class="col-md-5 text-center">
                 <!--    <a th:href="@{/categories/edit/{id}(id=${category.id})}" class="btn btn-dark">Edit</a> -->
-                    <a th:href="@{/quizzes/delete/{id}(id=${quiz.id})}"  class="btn btn-dark">Delete</a>  
+                <!--    <a th:href="@{/quizResults/leaderboard/{id}(id=${quiz.id})}"  class="btn btn-dark">Show Profile</a>  -->
                 </td>
             </tr>
         </th:block>

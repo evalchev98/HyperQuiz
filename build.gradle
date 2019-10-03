@@ -31,5 +31,8 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	compile group: 'org.modelmapper', name: 'modelmapper', version: '0.7.5'
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5'
+	compile group: 'com.cloudinary', name: 'cloudinary', version: '1.0.2'
+	compile group: 'io.grpc', name: 'grpc-protobuf', version: '1.16.1'
+	
 	
 }

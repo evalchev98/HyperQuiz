@@ -20,6 +20,10 @@
             <label for="add-quiz-expectedDuration" class="font-weight-bold">Expected duration</label>
             <input type="number" class="form-control text-center" id="add-quiz-expectedDuration" name="expectedDuration" th:value="*{expectedDuration}">
         </div>
+         <div class="form-group">
+            <label for="add-quiz-image" class="font-weight-bold">Image</label>
+            <input type="file" class="form-control-file" id="add-quiz-image" name="imageUrl" th:value="*{imageUrl}">
+        </div>
         <hr class="hr-2 bg-dark">
         <div class="button-holder d-flex justify-content-center">
             <button type="submit" class="btn btn-success">Add Quiz</button>

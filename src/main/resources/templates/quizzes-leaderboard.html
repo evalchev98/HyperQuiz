@@ -15,9 +15,7 @@
         <thead>
         <tr class="row mx-auto">
             <th class="col-md-2 text-center">#</th>
-            <th class="col-md-3 text-center">Image</th>
             <th class="col-md-5 text-center">Name</th>
-            <th class="col-md-5 text-center">Expected duration</th>
         </tr>
         </thead>
         <tbody>
@@ -25,12 +23,10 @@
         <th:block th:each="quiz, iter : ${quizzes}">
             <tr class="row mx-auto">
                 <th class="col-md-2 text-center" th:text="${iter.index + 1}"></th>
-                <td class="col-md-3"><div class="text-center"><img th:src="${quiz.imageUrl}" width="40" height="40" alt="Quiz"></div></td> 
                 <td class="col-md-5 text-center" th:text="${quiz.name}"></td>
-                <td class="col-md-5 text-center" th:text="${quiz.expectedDuration}"></td>
                 <td class="col-md-5 text-center">
                 <!--    <a th:href="@{/categories/edit/{id}(id=${category.id})}" class="btn btn-dark">Edit</a> -->
-                    <a th:href="@{/quizzes/delete/{id}(id=${quiz.id})}"  class="btn btn-dark">Delete</a>  
+                    <a th:href="@{/quizresult/leaderboard/{id}(id=${quiz.id})}"  class="btn btn-dark">Show Leaderboard</a>  
                 </td>
             </tr>
         </th:block>

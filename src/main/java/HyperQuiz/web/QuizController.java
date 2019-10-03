@@ -20,6 +20,7 @@ import HyperQuiz.entities.Quiz;
 import HyperQuiz.models.binding.QuizAddBindingModel;
 import HyperQuiz.models.service.QuizServiceModel;
 import HyperQuiz.models.view.QuizViewModel;
+import HyperQuiz.service.CloudinaryService;
 import HyperQuiz.service.QuizService;
 
 @Controller
@@ -27,10 +28,12 @@ import HyperQuiz.service.QuizService;
 public class QuizController extends BaseController {
 
 	private QuizService quizService;
+	private CloudinaryService cloudinaryService;
 //	private ModelMapper modelMapper;
 
 	@Autowired
-	public QuizController(QuizService quizService) {
+	public QuizController(QuizService quizService, CloudinaryService cloudinaryService) {
+		this.cloudinaryService=cloudinaryService;
 		this.quizService = quizService;
 		//this.modelMapper = modelMapper;
 	}
@@ -46,7 +49,10 @@ public class QuizController extends BaseController {
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ModelAndView addQuizConfirm(ModelAndView modelAndView,
 			@ModelAttribute(name = "model") Quiz model) {
-		Quiz quiz=this.quizService.createQuiz(model);
+		//da opravq cloudinaryconfig
+		Quiz quiz=model;
+		quiz.setImageUrl(model.getImageUrl());
+		this.quizService.createQuiz(quiz);
 		modelAndView.addObject(quiz);
 		return super.redirect("/quizzes/all");
 	}

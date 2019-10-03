@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="quiz_results")
-public class QuizResult extends BaseEntity {
+public class QuizResult extends BaseEntity implements Comparable<QuizResult> {
 
 	private Quiz quiz;
 	private User user;
@@ -49,6 +49,11 @@ public class QuizResult extends BaseEntity {
 	@Column(name = "score", nullable = false)
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	@Override
+	public int compareTo(QuizResult quizResult) {
+		return Integer.compare(this.score, quizResult.score);
 	};
 	
 	
