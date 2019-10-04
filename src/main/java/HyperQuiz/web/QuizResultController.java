@@ -1,6 +1,5 @@
 package HyperQuiz.web;
 
-
 import java.security.Principal;
 import java.util.List;
 
@@ -54,7 +53,7 @@ public class QuizResultController extends BaseController {
 		this.quizResultService.createQuizResult(quizResult);
 		return super.redirect("/home");
 	}
-	
+
 	@GetMapping("/quizzes")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ModelAndView showQuizzes(ModelAndView modelAndView) {
@@ -62,15 +61,24 @@ public class QuizResultController extends BaseController {
 		modelAndView.addObject("quizzes", quizzes);
 		return super.view("quizzes-leaderboard", modelAndView);
 	}
-	
+
 	@GetMapping("/leaderboard/{id}")
 	@PreAuthorize("hasRole('ROLE_USER')")
-	public ModelAndView showLeaderboard(ModelAndView modelAndView,@PathVariable String id) {
-		Quiz quiz=this.quizService.findQuizByID(id);
+	public ModelAndView showLeaderboard(ModelAndView modelAndView, @PathVariable String id) {
+		Quiz quiz = this.quizService.findQuizByID(id);
 		List<QuizResult> quizResults = this.quizResultService.findByQuiz(quiz);
 		this.quizResultService.sortResults(quizResults);
 		modelAndView.addObject("quizResults", quizResults);
 		return super.view("quiz-leaderboard", modelAndView);
+	}
+
+	@GetMapping("/user/{id}")
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public ModelAndView showUserFromLeaderboard(ModelAndView modelAndView, @PathVariable String id) {
+		User user = this.modelMapper.map(this.userService.findUserById(id), User.class);
+		modelAndView.addObject("model", user);
+		return super.view("profile", modelAndView);
+		// napravi novo view bez edit profile i da ne e tolkova grozno
 	}
 
 }

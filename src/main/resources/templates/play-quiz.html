@@ -37,11 +37,12 @@
       </th:block>
     </table>
     <div class="button-holder d-flex justify-content-center">
-            <button type="submit" class="btn btn-success">Finish</button>
+            <button type="submit" id="myButton" class="btn btn-success">Finish</button>
      </div>
     <div th:object="${quizResult}" style="display: none;">
     The value is: <input type="number"  id="selvalue" name="score" th:value="${score}" style="text-align:center; font-size:large;"/>
     </div>
+      <div>Quiz closes in <span id="time"></span> minutes!</div>
     </form>
     </main>
 <footer>
@@ -57,5 +58,39 @@ total += parseFloat($(this). val());
 });
 $("#selvalue"). val(total);
 });
+
+var expectedDuration= [[${model.expectedDuration}]];
+setTimeout(function(){ window.location = "/home"; }, expectedDuration*60000);
+
+function startTimer(duration, display) {
+    var start = Date.now(),
+        diff,
+        minutes,
+        seconds;
+    function timer() {
+        diff = duration - (((Date.now() - start) / 1000) | 0);
+
+        minutes = (diff / 60) | 0;
+        seconds = (diff % 60) | 0;
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds; 
+
+        if (diff <= 0) {
+            start = Date.now() + 1000;
+        }
+    };
+    timer();
+    setInterval(timer, 1000);
+}
+
+window.onload = function () {
+    var duration = [[${model.expectedDuration}]]*60;
+        display = document.querySelector('#time');
+    startTimer(duration, display);
+};
+
 </script>
 </html>

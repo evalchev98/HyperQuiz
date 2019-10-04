@@ -28,7 +28,7 @@
                 <td class="col-md-5 text-center" th:text="${quizResult.score}"></td>
                 <td class="col-md-5 text-center">
                 <!--    <a th:href="@{/categories/edit/{id}(id=${category.id})}" class="btn btn-dark">Edit</a> -->
-                <!--    <a th:href="@{/quizResults/leaderboard/{id}(id=${quiz.id})}"  class="btn btn-dark">Show Profile</a>  -->
+                    <a th:href="@{/quizresult/user/{id}(id=${quizResult.user.id})}"  class="btn btn-dark">Show Profile</a>  -->
                 </td>
             </tr>
         </th:block>
