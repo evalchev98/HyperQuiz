@@ -18,16 +18,18 @@ import HyperQuiz.repository.QuestionRepository;
 @Service
 public class QuestionServiceImpl implements QuestionService	 {
 	
+	@Autowired
 	private QuestionRepository questionRepository;
 	//private ModelMapper modelMapper;
+	@Autowired
 	private QuestionMapper questionMapper;
 	
-	@Autowired
-	public QuestionServiceImpl(QuestionRepository questionRepository , QuestionMapper questionMapper) {
-		this.questionRepository = questionRepository;
-		//this.modelMapper = modelMapper;
-		this.questionMapper = questionMapper;
-	}
+	/*
+	 * @Autowired public QuestionServiceImpl(QuestionRepository questionRepository ,
+	 * QuestionMapper questionMapper) { this.questionRepository =
+	 * questionRepository; //this.modelMapper = modelMapper; this.questionMapper =
+	 * questionMapper; }
+	 */
 
 	@Override
 	public Question createQuestion(QuestionDTO questionDTO) {

@@ -16,7 +16,7 @@
          <tr>
         <th>Question</th>
       </tr>
-      <th:block th:each="question, iter : ${model.questions}">
+      <th:block th:each="question, iter : ${randomQuestionsForQuiz}">
       <tr >
         <td class="col-md-5 text-center" th:text="${question.text}"></td>
         <td >

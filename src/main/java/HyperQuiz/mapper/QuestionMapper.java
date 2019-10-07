@@ -15,8 +15,6 @@ import HyperQuiz.models.service.QuizServiceModel;
 import HyperQuiz.service.AnswerService;
 import HyperQuiz.service.QuizService;
 
-// TO DO Answer Service
-
 @Component
 public class QuestionMapper {
 	

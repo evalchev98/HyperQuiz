@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import HyperQuiz.entities.Question;
 import HyperQuiz.entities.Quiz;
 import HyperQuiz.models.binding.QuizAddBindingModel;
 import HyperQuiz.models.service.QuizServiceModel;
@@ -84,7 +85,9 @@ public class QuizController extends BaseController {
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ModelAndView playQuiz(@PathVariable String id, ModelAndView modelAndView) {
 		Quiz quiz = this.quizService.findQuizByID(id);
+		List<Question> randomQuestionsForQuiz= this.quizService.randomQuestions(quiz, 3);
 		modelAndView.addObject("model", quiz);
+		modelAndView.addObject("randomQuestionsForQuiz", randomQuestionsForQuiz);
 		return super.view("play-quiz", modelAndView);
 	}
 
