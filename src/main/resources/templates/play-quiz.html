@@ -37,7 +37,7 @@
       </th:block>
     </table>
     <div class="button-holder d-flex justify-content-center">
-            <button type="submit" id="myButton" class="btn btn-success">Finish</button>
+            <button onclick="myFunction()" type="submit" id="myButton" class="btn btn-success" >Finish</button>            
      </div>
     <div th:object="${quizResult}" style="display: none;">
     The value is: <input type="number"  id="selvalue" name="score" th:value="${score}" style="text-align:center; font-size:large;"/>
@@ -51,8 +51,9 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+var total
 $("input[type=radio]"). click(function() {
-var total = 0;
+ total = 0;
 $("input[type=radio]:checked"). each(function() {
 total += parseFloat($(this). val());
 });
@@ -91,6 +92,10 @@ window.onload = function () {
         display = document.querySelector('#time');
     startTimer(duration, display);
 };
+
+function myFunction() {
+	  alert("Your score is:" +total);
+	}
 
 </script>
 </html>
